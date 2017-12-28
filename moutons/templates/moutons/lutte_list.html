@@ -1,0 +1,38 @@
+{% extends "base_moutons.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'moutons_lutte_list' %}">Lutte Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>name_male</td>
+    <td>alive_number</td>
+    <td>dead_number</td>
+    <td>birth_weight_1</td>
+    <td>birth_weight_2</td>
+    <td>birth_weight_3</td>
+    <td>bred_number</td>
+    <td>sex</td>
+    <td>remark</td>
+    <td>lutte_type</td>
+    <td>code</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.name_male }}</td>
+    <td>{{ object.alive_number }}</td>
+    <td>{{ object.dead_number }}</td>
+    <td>{{ object.birth_weight_1 }}</td>
+    <td>{{ object.birth_weight_2 }}</td>
+    <td>{{ object.birth_weight_3 }}</td>
+    <td>{{ object.bred_number }}</td>
+    <td>{{ object.sex }}</td>
+    <td>{{ object.remark }}</td>
+    <td>{{ object.lutte_type }}</td>
+    <td>{{ object.code }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'moutons_lutte_create' %}">Create new Lutte</a>
+{% endblock %}

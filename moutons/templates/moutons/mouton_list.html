@@ -1,0 +1,67 @@
+{% extends "base_moutons.html" %}
+{% load static %}
+{% load sanitel %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-2">
+            <a class="btn btn-primary" href="{% url 'moutons_mouton_create' %}">Ajout animal</a>
+        </div>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="searchMouton"
+                   onkeyup="filterTable('searchMouton','tableMouton',[1,2])"
+                   placeholder="Filtre sur N° Sanitel ou Nom">
+        </div>
+    </div>
+
+    <hr>
+    <table id="tableMouton" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>N° Sanitel</th>
+            <th>Nom</th>
+            <th>Date de naissance</th>
+            <th>Sexe</th>
+            <th>Race</th>
+            <th>Lot</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mouton in mouton_list %}
+        <tr>
+            <!-- <td>{{mouton.pk}}</td> -->
+            <td>
+                <div class="btn-group" role="group" aria-label="actions">
+                    <a type="button" class="btn btn-default btn-sm" aria-label="consulter"
+                       href="{{mouton.get_absolute_url}}" title="consulter">
+                        <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+
+                    </a>
+                    <a type="button" class="btn btn-default btn-sm" aria-label="editer" href="{{mouton.get_update_url}}"
+                       title="editer">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                    <a type="button" class="btn btn-default btn-sm" aria-label="sortie" href="{{mouton.get_sortie_url}}"
+                       title="sortie">
+                        <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </td>
+            <td>{{ mouton.sanitel_number | sanitel }}</td>
+            <td>{{ mouton.name }}</td>
+            <td>{{ mouton.birth_date | date:"d/m/Y" }}</td>
+            <td>{{ mouton.sex }}</td>
+            <td>{{ mouton.race }}</td>
+            <td>{{ mouton.lot_number}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src='{% static "js/moutonfiltertable.js" %}'></script>
+{% endblock %}

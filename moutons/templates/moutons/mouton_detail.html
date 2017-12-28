@@ -1,0 +1,186 @@
+{% extends "base_moutons.html" %}
+{% load static %}
+{% load sanitel %}
+{% block content %}
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="actions">
+        <a type="button" class="btn btn-default" aria-label="retour" href="{% url 'moutons_mouton_list' %}"
+           title="retour">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+        </a>
+        <a type="button" class="btn btn-default" aria-label="editer" href="{{object.get_update_url}}" title="editer">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+        <a type="button" class="btn btn-default" aria-label="sortie" href="{{object.get_sortie_url}}"
+           title="sortie">
+            <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+        </a>
+
+    </div>
+    <hr>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>N° Sanitel:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.sanitel_number | sanitel }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>N° Origine:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.origin_number }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>N° Herbook:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.herbook_number }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Date de naissance:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birth_date | date:"d/m/Y" }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Sexe:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.sex }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Race:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.race }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Entrée:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.in_text }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Date d'entrée:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.in_date | date:"d/m/Y" }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Nom:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.name }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Mère:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.mother | sanitel }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Père:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.father }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Née:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birth_siblings }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Lot:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.lot_number }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Genotype:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.genotype }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Prise de sang:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.blood_test }}</p></div>
+    </div>
+    <hr>
+</div>
+
+<div class="container">
+    <button class="btn btn-primary btn-sm btn-block" data-toggle="collapse" data-target="#traitement">
+        Commentaires & Traitements
+    </button>
+</div>
+
+<div id="traitement" class="container collapse">
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Traitement:</b></p></div>
+        <div class="col-lg-4"><p>{{ object.traitement }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Commentaires:</b></p></div>
+        <div class="col-lg-4"><p>{{ object.comment }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Commentaire naissance:</b></p></div>
+        <div class="col-lg-4"><p>{{ object.birth_comment }}</p></div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <div class="btn-group" role="group" aria-label="actions">
+                    <a type="button" class="btn btn-default btn-xs" aria-label="ajouter"
+                       href="{% url 'moutons_treatment_create' object.id %}"
+                       title="ajouter">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+
+                    </a>
+                </div>
+            </th>
+            <th>Date</th>
+            <th>Traitement</th>
+            <th>Commentaires</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for treatment in object.treatment_set.all %}
+        <tr>
+            <td>
+                <a type="button" class="btn btn-default btn-xs" aria-label="editer"
+                   href="{{treatment.get_update_url}}"
+                   title="editer">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </a>
+                <!--                    <a type="button" class="btn btn-default btn-sm" aria-label="supprimer" href="{{mouton.get_sortie_url}}"
+                                       title="supprimer">
+                                        <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+                                    </a> -->
+
+            </td>
+            <td>{{ treatment.date | date:"d/m/Y"}}</td>
+            <td>{{ treatment.treatment }}</td>
+            <td>{{ treatment.comment }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if object.out_date %}
+
+<div class="container">
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Date de sortie:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.out_date | date:"d/m/Y" }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Commentaire de sortie:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.out_text }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Poids de sortie:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.sold_weight }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Poids abattu:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.slaughtered_weight }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Prix vente:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.sold_value }}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Mouton class:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.mouton_class }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Destination:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.destination_number }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Qualification:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.qualification }}</p></div>
+    </div>
+</div>
+{% endif %}
+
+
+<!--
+<table class="table">
+        <td>{{ object.out_date }}</td>
+        <td>{{ object.out_text }}</td>
+        <td>{{ object.birth_weight }}</td>
+        <td>{{ object.one_month_weight }}</td>
+        <td>{{ object.one_month_date }}</td>
+        <td>{{ object.two_month_weight }}</td>
+        <td>{{ object.two_month_date }}</td>
+        <td>{{ object.third_weight }}</td>
+        <td>{{ object.third_date }}</td>
+        <td>{{ object.fourth_weight }}</td>
+        <td>{{ object.fourth_date }}</td>
+        <td>{{ object.sold_weight }}</td>
+        <td>{{ object.slaughtered_weight }}</td>
+        <td>{{ object.mouton_class }}</td>
+        <td>{{ object.sold_value }}</td>
+        <td>{{ object.destination_number }}</td>
+        <td>{{ object.qualification }}</td>
+        <td>{{ object.birth }}</td>
+    </tr>
+</table>
+-->
+
+{% endblock %}

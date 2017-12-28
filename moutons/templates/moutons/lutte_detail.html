@@ -1,0 +1,20 @@
+{% extends "base_moutons.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'moutons_lutte_list' %}">Lutte Listing</a></p>
+<table class="table">
+<tr><td>name_male</td><td>{{ object.name_male }}</td></tr>
+<tr><td>alive_number</td><td>{{ object.alive_number }}</td></tr>
+<tr><td>dead_number</td><td>{{ object.dead_number }}</td></tr>
+<tr><td>birth_weight_1</td><td>{{ object.birth_weight_1 }}</td></tr>
+<tr><td>birth_weight_2</td><td>{{ object.birth_weight_2 }}</td></tr>
+<tr><td>birth_weight_3</td><td>{{ object.birth_weight_3 }}</td></tr>
+<tr><td>bred_number</td><td>{{ object.bred_number }}</td></tr>
+<tr><td>sex</td><td>{{ object.sex }}</td></tr>
+<tr><td>remark</td><td>{{ object.remark }}</td></tr>
+<tr><td>lutte_type</td><td>{{ object.lutte_type }}</td></tr>
+<tr><td>code</td><td>{{ object.code }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Lutte</a>
+
+{% endblock %}

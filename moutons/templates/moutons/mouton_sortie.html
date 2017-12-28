@@ -1,0 +1,44 @@
+{% extends "base_moutons.html" %}
+{% load static %}
+{% load placeholder %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="actions">
+        <a type="button" class="btn btn-default" aria-label="retour" href="{% url 'moutons_mouton_list' %}"
+           title="retour">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+        </a>
+    </div>
+    <hr>
+</div>
+
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+        <div class="form-group {% if field.errors%}has-error{% endif %}">
+            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field | add_class:"form-control" }}
+
+            {% for error in field.errors %}
+                <h4><span class="label label-danger">{{ error | escape}}</span></h4>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="Enregistrer">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}
