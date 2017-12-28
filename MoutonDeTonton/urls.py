@@ -26,3 +26,7 @@ urlpatterns = [
 urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
+
+#Add static pages
+urlpatterns += [
+]
