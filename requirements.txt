@@ -13,3 +13,4 @@ pytz==2017.2
 six==1.10.0
 virtualenv==15.1.0
 virtualenvwrapper-win==1.2.1
+whitenoise==3.3.1
