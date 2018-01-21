@@ -78,7 +78,7 @@ class Mouton(models.Model):
         ordering = ('-pk',)
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s' % self.sanitel_number
 
     def get_absolute_url(self):
         return reverse('moutons_mouton_detail', args=(self.pk,))
@@ -137,8 +137,14 @@ class Treatment(models.Model):
 class Lutte(models.Model):
 
     # Relationship Fields
-    mouton_number = models.ForeignKey('moutons.Mouton', on_delete=models.DO_NOTHING, related_name='+')
-    male_number = models.ForeignKey('moutons.Mouton', on_delete=models.DO_NOTHING, null=True, blank=True,related_name='+' )
+    mouton_number = models.ForeignKey('moutons.Mouton',
+                                      on_delete=models.DO_NOTHING,
+                                      limit_choices_to={'sex' : 'F'},
+                                      related_name='+')
+    male_number = models.ForeignKey('moutons.Mouton',
+                                    on_delete=models.DO_NOTHING,
+                                    limit_choices_to={'sex': 'M'},
+                                    null=True, blank=True,related_name='+' )
 
     # Fields
     date_lutte = DateField(blank=True, null=True)
