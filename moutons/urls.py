@@ -26,11 +26,10 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for Lot
-    url(r'^lot/$', views.LotListView.as_view(), name='moutons_lot_list'),
+    # url for Treatment
+    url(r'^mouton/(?P<mouton_number>\S+)/treatement/create/$', views.TreatmentCreateView.as_view(), name='moutons_treatment_create'),
+    url(r'^treatment/update/(?P<pk>\S+)/$', views.TreatmentUpdateView.as_view(), name='moutons_treatment_update'),
 )
-
-
 urlpatterns += (
     # urls for Lutte
     url(r'^lutte/$', views.LutteListView.as_view(), name='moutons_lutte_list'),
@@ -39,8 +38,3 @@ urlpatterns += (
     url(r'^lutte/update/(?P<pk>\S+)/$', views.LutteUpdateView.as_view(), name='moutons_lutte_update'),
 )
 
-urlpatterns += (
-    # url for Treatment
-    url(r'^mouton/(?P<mouton_number>\S+)/treatement/create/$', views.TreatmentCreateView.as_view(), name='moutons_treatment_create'),
-    url(r'^treatment/update/(?P<pk>\S+)/$', views.TreatmentUpdateView.as_view(), name='moutons_treatment_update'),
-)

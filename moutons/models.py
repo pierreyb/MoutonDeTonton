@@ -136,25 +136,28 @@ class Treatment(models.Model):
 
 class Lutte(models.Model):
 
+    # Relationship Fields
+    mouton_number = models.ForeignKey('moutons.Mouton', on_delete=models.DO_NOTHING, related_name='+')
+    male_number = models.ForeignKey('moutons.Mouton', on_delete=models.DO_NOTHING, null=True, blank=True,related_name='+' )
+
     # Fields
+    date_lutte = DateField(blank=True, null=True)
     name_male = CharField(max_length=50)
-    alive_number = IntegerField(blank=True)
-    dead_number = IntegerField(blank=True)
+    birth_date = DateField(blank=True, null=True)
+    alive_number = IntegerField(blank=True, null=True)
+    dead_number = IntegerField(blank=True, null=True)
     birth_weight_1 = CharField(max_length=50, blank=True)
     birth_weight_2 = CharField(max_length=50, blank=True)
     birth_weight_3 = CharField(max_length=50, blank=True)
-    bred_number = IntegerField(blank=True)
+    bred_number = IntegerField(blank=True, null=True)
     sex = CharField(max_length=50, blank=True)
     remark = TextField(blank=True)
     lutte_type = CharField(max_length=5, default='1')
     code = CharField(max_length=5, blank=True)
 
-    # Relationship Fields
-    mouton_number = models.ForeignKey('moutons.Mouton', )
-    male_number = models.ForeignKey('moutons.Mouton', on_delete=models.SET_NULL, null=True, blank=True,related_name='+' )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('-date_lutte',)
 
     def __str__(self):
         return u'%s' % self.pk

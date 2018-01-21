@@ -43,10 +43,6 @@ class MoutonInventaireListView(ListView):
     queryset = Mouton.objects.filter(out_date__isnull = False)
 
 
-class LotListView(ListView):
-    model = Lot
-
-
 class TreatmentListView(ListView):
     model = Treatment
 
