@@ -57,3 +57,7 @@ class LutteForm(forms.ModelForm):
         fields = ['date_lutte', 'mouton_number', 'male_number', 'name_male', 'alive_number', 'dead_number',
                   'birth_weight_1', 'birth_weight_2', 'birth_weight_3',
                   'bred_number', 'sex', 'remark', 'lutte_type', 'code']
+
+    def __init__(self, *args, **kwargs):
+        super(LutteForm, self).__init__(*args, **kwargs)
+        self.fields['date_lutte'].widget.attrs['placeholder'] = "dd/mm/yyyy"

@@ -51,7 +51,7 @@ class Mouton(models.Model):
     mother = CharField("mère", max_length=50, blank=True)
     name = CharField("nom", max_length=50, blank=True)
     birth_date2 = DateField("date de naissance 2", blank=True, null=True)
-    birth_weight = DecimalField("poid à la naissance", max_digits=6,decimal_places=3, blank=True, null=True)
+    birth_weight = DecimalField("poids à la naissance", max_digits=6,decimal_places=3, blank=True, null=True)
     one_month_weight = DecimalField(max_digits=6,decimal_places=3, blank=True, null=True)
     one_month_date = DateField(blank=True, null=True)
     two_month_weight = DecimalField(max_digits=6, decimal_places=3, blank=True, null=True)
@@ -140,25 +140,27 @@ class Lutte(models.Model):
     mouton_number = models.ForeignKey('moutons.Mouton',
                                       on_delete=models.DO_NOTHING,
                                       limit_choices_to={'sex' : 'F'},
-                                      related_name='+')
+                                      related_name='+',
+                                      verbose_name='N° Sanitel')
     male_number = models.ForeignKey('moutons.Mouton',
                                     on_delete=models.DO_NOTHING,
                                     limit_choices_to={'sex': 'M'},
-                                    null=True, blank=True,related_name='+' )
+                                    null=True, blank=True,related_name='+' ,
+                                    verbose_name='numéro du male')
 
     # Fields
-    date_lutte = DateField(blank=True, null=True)
-    name_male = CharField(max_length=50)
-    birth_date = DateField(blank=True, null=True)
-    alive_number = IntegerField(blank=True, null=True)
-    dead_number = IntegerField(blank=True, null=True)
-    birth_weight_1 = CharField(max_length=50, blank=True)
-    birth_weight_2 = CharField(max_length=50, blank=True)
-    birth_weight_3 = CharField(max_length=50, blank=True)
-    bred_number = IntegerField(blank=True, null=True)
-    sex = CharField(max_length=50, blank=True)
-    remark = TextField(blank=True)
-    lutte_type = CharField(max_length=5, default='1')
+    date_lutte = DateField("date lutte", blank=True, null=True)
+    name_male = CharField("nom du père", max_length=50)
+    birth_date = DateField("date de naissance", blank=True, null=True)
+    alive_number = IntegerField("nombre de vivant", blank=True, null=True)
+    dead_number = IntegerField("nombre déces", blank=True, null=True)
+    birth_weight_1 = CharField("poids naissance 1", max_length=50, blank=True)
+    birth_weight_2 = CharField("poids naissance 2", max_length=50, blank=True)
+    birth_weight_3 = CharField("poids naissance 3", max_length=50, blank=True)
+    bred_number = IntegerField("nombre élevé", blank=True, null=True)
+    sex = CharField("sexe", max_length=50, blank=True)
+    remark = TextField("remarque", blank=True)
+    lutte_type = CharField("type de lutte", max_length=5, default='1')
     code = CharField(max_length=5, blank=True)
 
 
