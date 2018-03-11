@@ -153,7 +153,7 @@ class Lutte(models.Model):
     name_male = CharField("nom du père", max_length=50)
     birth_date = DateField("date de naissance", blank=True, null=True)
     alive_number = IntegerField("nombre de vivant", blank=True, null=True)
-    dead_number = IntegerField("nombre déces", blank=True, null=True)
+    dead_number = IntegerField("nombre décès", blank=True, null=True)
     birth_weight_1 = CharField("poids naissance 1", max_length=50, blank=True)
     birth_weight_2 = CharField("poids naissance 2", max_length=50, blank=True)
     birth_weight_3 = CharField("poids naissance 3", max_length=50, blank=True)

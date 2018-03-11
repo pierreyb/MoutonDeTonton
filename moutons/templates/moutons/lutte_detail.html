@@ -1,20 +1,76 @@
 {% extends "base_moutons.html" %}
 {% load static %}
+{% load sanitel %}
+
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'moutons_lutte_list' %}">Lutte Listing</a></p>
-<table class="table">
-<tr><td>name_male</td><td>{{ object.name_male }}</td></tr>
-<tr><td>alive_number</td><td>{{ object.alive_number }}</td></tr>
-<tr><td>dead_number</td><td>{{ object.dead_number }}</td></tr>
-<tr><td>birth_weight_1</td><td>{{ object.birth_weight_1 }}</td></tr>
-<tr><td>birth_weight_2</td><td>{{ object.birth_weight_2 }}</td></tr>
-<tr><td>birth_weight_3</td><td>{{ object.birth_weight_3 }}</td></tr>
-<tr><td>bred_number</td><td>{{ object.bred_number }}</td></tr>
-<tr><td>sex</td><td>{{ object.sex }}</td></tr>
-<tr><td>remark</td><td>{{ object.remark }}</td></tr>
-<tr><td>lutte_type</td><td>{{ object.lutte_type }}</td></tr>
-<tr><td>code</td><td>{{ object.code }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Lutte</a>
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="actions">
+        <a type="button" class="btn btn-default" aria-label="retour" href="{% url 'moutons_lutte_list' %}"
+           title="retour">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+        </a>
+        <a type="button" class="btn btn-default" aria-label="editer" href="{{object.get_update_url}}" title="editer">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+
+    </div>
+    <hr>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Date lutte:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.date_lutte | date:"d/m/Y" }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>N° Sanitel:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.mouton_number.sanitel_number | sanitel }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>N° male:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.male_number.sanitel_number | sanitel }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Nom male:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.name_male }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Date de naissance:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birt_hdate | date:"d/m/Y" }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Nombre de vivant:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.alive_number }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Nombre de décès:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.dead_number }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Poids naissance 1:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birth_weight_1 }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Poids naissance 2:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birth_weight_2 }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Poids naissance 3:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.birth_weight_3 }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Nombre élevé:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.bred_number }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Sexe:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.sex }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Remarque:</b></p></div>
+        <div class="col-lg-4"><p>{{ object.remark }}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><p class="text-nowrap"><b>Type de lutte:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.lutte_type }}</p></div>
+        <div class="col-lg-2"><p class="text-nowrap"><b>Code:</b></p></div>
+        <div class="col-lg-2"><p>{{ object.code}}</p></div>
+    </div>
+</div>
 
 {% endblock %}
