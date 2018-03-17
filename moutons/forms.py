@@ -1,5 +1,7 @@
 import re
 from django import forms
+
+from moutons.templatetags.sanitel import sanitel
 from .models import Mouton, Treatment, Lutte
 
 
@@ -61,3 +63,14 @@ class LutteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(LutteForm, self).__init__(*args, **kwargs)
         self.fields['date_lutte'].widget.attrs['placeholder'] = "dd/mm/yyyy"
+
+        self.fields['mouton_number'].widget.attrs['class'] = "selectpicker"
+        self.fields['mouton_number'].widget.attrs['data-live-search'] = "true"
+        self.fields['mouton_number'].widget.attrs['data-style'] = "btn"
+        self.fields['mouton_number'].label_from_instance = lambda obj: "%s  (%s)" % (sanitel(obj.sanitel_number), obj.name)
+
+        self.fields['male_number'].widget.attrs['class'] = "selectpicker"
+        self.fields['male_number'].widget.attrs['data-live-search'] = "true"
+        self.fields['male_number'].widget.attrs['data-style'] = "btn"
+        self.fields['male_number'].label_from_instance = lambda obj: "%s  (%s)" % (sanitel(obj.sanitel_number), obj.name)
+

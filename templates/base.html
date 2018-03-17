@@ -13,6 +13,7 @@
     <title>{{ APPTITLE }}</title>
 
     <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-select.min.css" %}'>
     <link rel="stylesheet" type="text/css" href='{% static "css/sticky-footer.css" %}'>
     {% block head %}{% endblock %}
 </head>
@@ -80,6 +81,8 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
 <script type="text/javascript" src='{% static "js/bootstrap.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/bootstrap-select.min.js" %}'></script>
+
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src='{% static "js/ie10-viewport-bug-workaround.js" %}'></script>
 {% block script %}{% endblock %}

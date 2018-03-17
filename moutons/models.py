@@ -150,7 +150,7 @@ class Lutte(models.Model):
 
     # Fields
     date_lutte = DateField("date lutte", blank=True, null=True)
-    name_male = CharField("nom du père", max_length=50)
+    name_male = CharField("nom du père", max_length=50, blank=True, null=True)
     birth_date = DateField("date de naissance", blank=True, null=True)
     alive_number = IntegerField("nombre de vivant", blank=True, null=True)
     dead_number = IntegerField("nombre décès", blank=True, null=True)
